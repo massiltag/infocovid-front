@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "build-prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -46,12 +47,12 @@
     "primeng": "^11.3.0-rc.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@angular/cli": "~10.1.2",
+    "@angular/compiler-cli": "~10.1.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.2",
-    "@angular/cli": "~10.1.2",
-    "@angular/compiler-cli": "~10.1.2",
     "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
