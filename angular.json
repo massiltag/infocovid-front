@@ -17,11 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "./build/APP",
+            "outputPath": "./dist/webapp",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "baseHref": "/APP/",
-            "deployUrl": "/APP/",
+            "baseHref": "/",
+            "deployUrl": "/",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
