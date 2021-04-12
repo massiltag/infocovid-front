@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Metrics} from '../../../../models/metrics.model';
+import {Prevision_confinement} from '../../../../models/prevision_confinement.model';
 import * as moment from 'moment';
 
 @Component({

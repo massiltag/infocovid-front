@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {Metrics} from '../../../models/metrics.model';
 import {MetricsService} from '../../../services/metrics.service';
+import {Prevision_confinement} from '../../../models/prevision_confinement.model';
+import {Prevision_immunite} from '../../../models/prevision_immunite.model';
 import {Prevision_confinementService} from '../../../services/prevision.service';
 
 @Component({
