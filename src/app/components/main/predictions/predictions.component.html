@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <div class="main-container" *ngIf="searching === 3; else spinner">
-    <h1 class="big-title">Prédictions</h1>
+    <h1 class="big-title">Prévisions</h1>
     <mat-grid-list cols="3" rowHeight="82vh">
         <mat-grid-tile [colspan]="2">
             <app-card
@@ -17,7 +17,7 @@
                                     [prevision_immunite]="prevision_immunite">
                             </app-predictions-vaccination>
                         </mat-tab>
-                        <mat-tab label="Deces & Hospitalisations">
+                        <mat-tab label="Décès & Hospitalisations">
                             <app-line-chart 
                                     [view]="[containerRef.offsetWidth, containerRef.offsetHeight -50]" 
                                     [data]="fiveDays"

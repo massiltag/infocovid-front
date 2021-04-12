@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Metrics} from '../../../../models/metrics.model';
-import {Prevision_immunite} from '../../../../models/prevision_immunite.model';
 import * as moment from 'moment';
 
 @Component({
@@ -57,7 +56,7 @@ export class PredictionsVaccinationComponent implements OnInit {
   }
 
   /* Comparer les variables pour recup le nombre de vaccination du dernier jour qui se trouve en bdd
-  *  Afin de pouvoir relier la ligne de vaccination réelle avec la ligne de vaccination prédit 
+  *  Afin de pouvoir relier la ligne de vaccination rï¿½elle avec la ligne de vaccination prï¿½dit 
   *  yesterday = la date d'hier
   *  m_day = date en bdd 
   *  Lorsque yesterday = m_day, on recup la valeur et on la stocke dans cum_dose1_prev
@@ -71,27 +70,30 @@ export class PredictionsVaccinationComponent implements OnInit {
   cleanForChart(metrics: Metrics[]): any[] {
     const cum_dose1 = [];
     const cum_dose1_prev = [];
-    
+
     metrics.forEach(m => {
-      // Ligne de vaccination réelle 
-      cum_dose1.push({
-        name: moment(m.date, 'YYYY-MM-DD').format('DD MMM'),
-        value: m.vaccineStats.n_cum_dose1
-      });
-      
+      if (m.vaccineStats.n_cum_dose1 != 0) {
+        // Ligne de vaccination rÃ©elle
+        cum_dose1.push({
+          name: moment(m.date, 'YYYY-MM-DD').format('DD MMM'),
+          value: m.vaccineStats.n_cum_dose1
+        });
+      } else {
+        cum_dose1.push({
+          name: moment(m.date, 'YYYY-MM-DD').format('DD MMM'),
+          value: cum_dose1.slice(-1).pop().value
+        });
+      }
+
       this.yesterday = moment(new Date(Date.now()), 'YYYY-MM-DD').subtract(1, "days").format('DD MMM');
       this.m_day = moment(m.date, 'YYYY-MM-DD').format('DD MMM');
-      //console.log("YESTERDAY : "+this.yesterday);
-      //console.log("M_DAY : "+this.m_day);
-   
-      if (this.yesterday == this.m_day) {
-        //console.log("Is equal");
 
-        // Ligne de vaccination prédit, ajout de la valeur du dernier jour réelle 
+      if (this.yesterday === this.m_day) {
+
+        // Ligne de vaccination prÃ©dit, ajout de la valeur du dernier jour rÃ©elle
         cum_dose1_prev.push({
-            //name: moment(m.date, 'YYYY-MM-DD').format('DD MMM'),
-            name: this.m_day,
-            value: m.vaccineStats.n_cum_dose1
+          name: this.m_day,
+          value: cum_dose1.slice(-1).pop().value
         });
       }
     });
@@ -102,7 +104,7 @@ export class PredictionsVaccinationComponent implements OnInit {
         this.buff = this.prevision_immunite.nbVaccinQuotidien[this.i];
         //console.log("TEST 2 : "+this.buff);
 
-        // Ligne de vaccination prédit, ajout des valeurs prédit 
+        // Ligne de vaccination prï¿½dit, ajout des valeurs prï¿½dit 
         cum_dose1_prev.push({
             name: moment(new Date(Date.now()), 'YYYY-MM-DD').add(this.cpt, "days").format('DD MMM'),
             value: this.buff
@@ -116,7 +118,7 @@ export class PredictionsVaccinationComponent implements OnInit {
         series: cum_dose1
       },
       {
-        name: 'Prevision dose 1',
+        name: 'PrÃ©vision dose 1',
         series: cum_dose1_prev
       }
     ];
